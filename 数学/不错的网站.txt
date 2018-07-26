@@ -1,0 +1,7 @@
+http://blog.csdn.net/xh_reventon/article/details/25662705 数学知识点
+
+组合数学
+http://www2.chinaedu.com/101resource004/wenjianku/200501/101ktb/lanmu/XF1S0213/XF1S0213.htm 隔板法
+http://www.cppblog.com/vici/archive/2011/09/05/155103.html 容斥原理
+http://blog.csdn.net/vsooda/article/details/7975485 母函数
+http://blog.csdn.net/xiaofei_it/article/details/17042651 母函数
