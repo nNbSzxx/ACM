@@ -41,6 +41,8 @@ inline void dfs2(int i)
 }
 int main()
 {
+    freopen("1003.in", "r", stdin);
+    freopen("1003std.out", "w", stdout);
     int i,j,k;
     while(scanf("%d%d",&n,&m)!=EOF)
       {
