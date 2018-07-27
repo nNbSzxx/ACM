@@ -74,6 +74,7 @@ void add(int u, int v, int id)
 
 void dfs(int x)
 {
+    /*
     if (degree[x]) {
         if (oddcnt == 0) {
             ++ oddcnt;
@@ -89,6 +90,7 @@ void dfs(int x)
             //}
         }
     }
+    */
     for (int i = head[x]; ~i; i = e[i].nt) {
         if (!e[i].vis) {
             e[i].vis = 1;
@@ -115,12 +117,23 @@ int main()
             degree[v] ^= 1;
         }
 
+        int lastodd;
+        int oddcnt = 0;
         for (int i = 1; i <= n; i ++) {
             if (degree[i] & 1) {
                 int x = find(i);
                 sumodd[x] += 1;
+                if (!oddcnt) {
+                    oddcnt ^= 1;
+                    lastodd = i;
+                } else {
+                    oddcnt ^= 1;
+                    add(i, lastodd, MAX);
+                    add(lastodd, i, MAX);
+                }
             }
         }
+
         for (int i = 1; i <= n; i ++) {
             int x = find(i);
             if (i == x && size[x] != 1) {
@@ -131,7 +144,7 @@ int main()
 
         for (int i = 1; i <= n; i ++) {
             if (i == find(i) && size[i] != 1) {
-                oddcnt = 0;
+                // oddcnt = 0;
                 dfs(i);
                 /*
                 outp.clear();
