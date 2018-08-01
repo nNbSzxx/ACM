@@ -80,27 +80,25 @@ int main()
         node[i].id = i;
     }
     sort(node + 1, node + 1 + t, cmp);
-    int l = node[1].l;
-    int r = node[1].l;
+    int l = node[1].r;
+    int r = node[1].r;
     tans = qkp(2, l);
     for (int i = 1; i <= t; i ++) {
-        while (l > node[i].l) {
-            -- l;
-            subl(l, r);
-
-        }
-        while (l < node[i].l) {
-            addl(l, r);
-            ++ l;
-        }
-        while (r > node[i].r) {
-
+		while (r > node[i].r) {
             subr(l, r);
             -- r;
         }
-        while (r > node[i].r) {
+		while (l < node[i].l) {
+            addl(l, r);
+            ++ l;
+        }
+		while (r < node[i].r) {
             ++ r;
             addr(l, r);
+        }
+        while (l > node[i].l) {
+            -- l;
+            subl(l, r);
         }
         ans[node[i].id] = tans;
     }
