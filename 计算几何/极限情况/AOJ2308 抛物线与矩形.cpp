@@ -56,8 +56,11 @@ bool check(double x, double h)
 
         bool ok = true;
         for (int i = 1; i <= n; i ++) {
+        	if (lf[i] >= pigx) {
+        		continue;
+			}
             if (pigx == rt[i]) {
-                if (hpigx > bw[i] && pigy < tp[i]) {
+                if (hpigx >= bw[i] && pigy <= tp[i]) {
                     ok = false;
                     break;
                 }
