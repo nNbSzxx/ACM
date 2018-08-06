@@ -10,6 +10,7 @@ inline bool cmp(const P&a,const P&b){
   return a.p<b.p;
 }
 int main(){
+  freopen("G.in", "r", stdin);
   scanf("%d",&T);
   while(T--){
     scanf("%d",&n);
