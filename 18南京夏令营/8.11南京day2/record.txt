@@ -1,0 +1,17 @@
+# day2
+
+## fibonacci
+
+## dp
+
+### DAG
+
+### matrix quick pow
+
+### text justification
+
+dp[i] = j > i   min(badvalue(i, j - 1) + dp[j])
+
+### dp record the path
+
+### knapsack
