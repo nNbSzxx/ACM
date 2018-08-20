@@ -8,24 +8,26 @@ const int MAX = 2e5 + 10;
 int n;
 int p[MAX];
 int c[MAX];
-int vis[MAX], indeg[MAX], paid[MAX];
+int vis[MAX], indeg[MAX], paid[MAX], hasfind[MAX];
 long long ans;
 
 void findminn(int x)
 {
-	if (paid[x]) {
+	if (paid[x] || hasfind[x]) {
 		return ;
 	}
+	hasfind[x] = 1;
 	int minn = c[x], id = x;
 	int b = p[x];
 	while (b != x) {
-		if (paid[b]) {
+		if (paid[b] || hasfind[b]) {
 			return ;
 		}
 		if (c[b] < minn) {
 			minn = c[b];
 			id = b;
 		}
+		hasfind[b] = 1;
 		b = p[b];
 	}
 	ans += minn;
