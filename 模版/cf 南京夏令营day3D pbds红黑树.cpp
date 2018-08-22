@@ -8,7 +8,7 @@ using namespace std;
 using namespace __gnu_pbds;
 const int MAX = 1e6 + 10;
 
-int vis[MAX];
+int vis[MAX], occ[MAX];
 int ans[MAX];
 int n, m, minn;
 
@@ -49,8 +49,13 @@ int main()
 			flag = false;
 			continue;
 		}
+		if (occ[u] && ans[it -> value] != u) {
+			flag = false;
+			continue;
+		}
 		//printf("%d %d\n", it -> value, it -> curid);
-		vis[u] = 1;
+		vis[it -> value] = 1;
+		occ[u] = 1;
 		ans[it -> value] = u;
 		rbt.insert(node(it -> value, minn --));
 		rbt.erase(it);
@@ -62,12 +67,12 @@ int main()
 	int id = 1;
 	for (int i = 1; i <= n; i ++) {
 		if (!ans[i]) {
-			while (vis[id]) {
+			while (occ[id]) {
 				++ id;
 			}
 			//printf("id i: %d %d\n", id, i);
 			ans[i] = id;
-			vis[id] = 1;
+			occ[id] = 1;
 		}
 		printf("%d ", ans[i]);
 	}
