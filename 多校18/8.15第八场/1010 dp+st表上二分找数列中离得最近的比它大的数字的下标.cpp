@@ -84,8 +84,8 @@ void init()
 
 int main()
 {
-	freopen("j.in", "r", stdin);
-	freopen("1010.out", "w", stdout);
+//	freopen("j.in", "r", stdin);
+//	freopen("1010.out", "w", stdout);
 	int t;
 	scanf("%d", &t);
 	while (t --) {
