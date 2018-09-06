@@ -6,7 +6,7 @@
 #include <cmath>
 using namespace std;
 const int MAXN = 505 * 2;
-const int MAXM = 1003 * 2 + 1003 * 4 + 503 * 8;
+const int MAXM = 1003 * 4 + 1003 * 4 + 503 * 503 * 8;
 
 struct edge {
     int v, nt;
@@ -101,6 +101,8 @@ bool check(int mid)
         int a = h1[i], b = h2[i];
         add(a, b + n);
         add(b, a + n);
+        add(a + n, b);
+        add(b + n, a);
     }
     for (int i = 1; i <= ml; i ++) {
         int a = l1[i], b = l2[i];

@@ -86,7 +86,7 @@ int swim(int x, int h, int id)
     int ret = x;
     for (int i = 0; h; i ++, h >>= 1) {
         if (h & 1) {
-            update(x, i, id);
+            update(ret, i, id);
             ret = anc[ret][i];
         }
     }
