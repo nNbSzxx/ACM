@@ -30,12 +30,7 @@ int main()
         for (int i = 1; i <= w; i ++) {
             scanf("%d%d%d", &wo[i].l, &wo[i].p, &wo[i].s);
         }
-        for (int i = 0; i <= w; i ++) {
-            for (int j = 0; j <= n; j ++) {
-                dp[i][j] = -INF;
-            }
-        }
-        dp[0][0] = 0;
+        memset(dp, 0, sizeof dp);
         sort(wo + 1, wo + 1 + w, cmp);
         for (int i = 1; i <= w; i ++) {
             while (!q.empty()) {
@@ -49,21 +44,37 @@ int main()
                 q.push_back(node(in, j));
             }
             for (int j = wo[i].s; j <= min(wo[i].s + wo[i].l - 1, n); j ++) {
-                dp[i][j] = max(dp[i][j], dp[i - 1][j]);
+                //dp[i][j] = max(dp[i][j], dp[i - 1][j]);
                 while (!q.empty() && q.front().id + wo[i].l < j) {
                     q.pop_front();
                 }
                 dp[i][j] = max(dp[i][j], q.front().v + j * wo[i].p);
+                /*
                 int in = dp[i - 1][j] - j * wo[i].p;
                 while (!q.empty() && q.back().v <= in) {
                     q.pop_back();
                 }
                 q.push_back(node(in, j));
+                */
             }
+            for (int j = 1; j <= n; j ++) {
+            	dp[i][j] = max(dp[i][j], dp[i][j - 1]);
+            	dp[i][j] = max(dp[i][j], dp[i - 1][j]);
+			}
         }
         int ans = -INF;
+        /*
+		for (int i = 1; i <= w; i ++) {
+        	for (int j = 1; j <= n; j ++) {
+        		printf("%13d ", dp[i][j]);
+			}
+			puts("");
+		} 
+		*/
         for (int i = 1; i <= w; i ++) {
-            ans = max(ans, dp[i][n]);
+        	for (int j = 1; j <= n; j ++) {
+        		ans = max(ans, dp[i][j]);
+			}
         }
         printf("%d\n", ans);
     }
