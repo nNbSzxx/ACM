@@ -1,4 +1,4 @@
-// ±¶ÔöÇóLCA 
+// å€å¢æ±‚LCA
 #include <iostream>
 #include <cstdio>
 #include <cstring>
@@ -6,17 +6,17 @@
 #include <queue>
 using namespace std;
 const int MAX = 1e4 + 10;
-// ×î´óÉî¶È¶Ô¶şÈ¡¶ÔÊı 
+// æœ€å¤§æ·±åº¦å¯¹äºŒå–å¯¹æ•°
 const int MAXH = 16;
 queue<int> q;
 struct edge {
 	int v, nt;
 } e[MAX];
 int n, isroot[MAX], head[MAX], cnte, dep[MAX];
-// anc[i][j]±íÊ¾µÚi¸ö½ÚµãÏòÉÏÌø2^j²ãºóµÄ½Úµã
-// anc[i][0]¾ÍÊÇ¸¸Ç×½Úµã
-// Èç¹ûÌø2^j²ãºó³¬¹ıÁËroot£¬ÄÇÃ´anc[i][j] = root
-int anc[MAX][MAXH]; 
+// anc[i][j]è¡¨ç¤ºç¬¬iä¸ªèŠ‚ç‚¹å‘ä¸Šè·³2^jå±‚åçš„èŠ‚ç‚¹
+// anc[i][0]å°±æ˜¯çˆ¶äº²èŠ‚ç‚¹
+// å¦‚æœè·³2^jå±‚åè¶…è¿‡äº†rootï¼Œé‚£ä¹ˆanc[i][j] = root
+int anc[MAX][MAXH];
 
 void init()
 {
@@ -33,11 +33,11 @@ void add(int u, int v)
 	head[u] = cnte;
 }
 
-// xÏòÉÏÌøh²ãºóµÄ½Úµã±àºÅ 
+// xå‘ä¸Šè·³hå±‚åçš„èŠ‚ç‚¹ç¼–å·
 int swim(int x, int h)
 {
 	int ret = x;
-	// ´Ó¶ş½øÖÆ½Ç¶È¿´£¬Èç6=110£¬ÄÇÃ´ÏÈÌø2²ã£¬ÔÙÌø4²ã
+	// ä»äºŒè¿›åˆ¶è§’åº¦çœ‹ï¼Œå¦‚6=110ï¼Œé‚£ä¹ˆå…ˆè·³2å±‚ï¼Œå†è·³4å±‚
 	for (int i = 0; h; i ++, h >>= 1) {
 		if (h & 1) {
 			ret = anc[ret][i];
@@ -46,7 +46,7 @@ int swim(int x, int h)
 	return ret;
 }
 
-// ±éÀúÕû¸öÊ÷£¬´ò³öanc±í
+// éå†æ•´ä¸ªæ ‘ï¼Œæ‰“å‡ºancè¡¨
 void bfs(int root)
 {
 	dep[root] = 1;
@@ -62,7 +62,7 @@ void bfs(int root)
 				dep[v] = dep[u] + 1;
 				anc[v][0] = u;
 				for (int i = 1; i < MAXH; i ++) {
-					// ±¶Ôö 
+					// å€å¢
 					anc[v][i] = anc[anc[v][i - 1]][i - 1];
 				}
 				q.push(v);
@@ -76,20 +76,20 @@ int lca(int x, int y)
 	if (dep[x] < dep[y]) {
 		swap(x, y);
 	}
-	// ÏÈ°Ñ½ÏÉîµÄÌøµ½½ÏÇ³µÄÍ¬Ò»¸ß¶È 
+	// å…ˆæŠŠè¾ƒæ·±çš„è·³åˆ°è¾ƒæµ…çš„åŒä¸€é«˜åº¦
 	x = swim(x, dep[x] - dep[y]);
 	if (x == y) {
 		return x;
 	}
-	// ºóÒ»´ÎÌøµÄ¸ß¶ÈÒ»¶¨±ÈÇ°Ò»´ÎÌøµÄ¸ß¶È»¹Ğ¡
-	// ¿ÉÒÔÓÃ·´Ö¤·¨Ö¤Ã÷
+	// åä¸€æ¬¡è·³çš„é«˜åº¦ä¸€å®šæ¯”å‰ä¸€æ¬¡è·³çš„é«˜åº¦è¿˜å°
+	// å¯ä»¥ç”¨åè¯æ³•è¯æ˜
 	for (int i = MAXH - 1; i >= 0; i --) {
 		if (anc[x][i] != anc[y][i]) {
 			x = anc[x][i];
 			y = anc[y][i];
 		}
 	}
-	// Ñ­»·½áÊøºó£¬anc[x][0] = anc[y][0] = lca 
+	// å¾ªç¯ç»“æŸåï¼Œanc[x][0] = anc[y][0] = lca
 	return anc[x][0];
 }
 
