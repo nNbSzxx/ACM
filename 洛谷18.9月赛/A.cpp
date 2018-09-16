@@ -11,12 +11,8 @@ int main()
     unsigned long long sum = 0;
     for (int i = 1; ; i ++) {
         sum = sum * 10 + 1;
-        if (sum < k) {
-            continue;
-        }
-        unsigned long long t = sum - k;
-
-        if (t % n == 0) {
+        sum = sum % n;
+        if (sum == k) {
             printf("%d\n", i);
             return 0;
         }
