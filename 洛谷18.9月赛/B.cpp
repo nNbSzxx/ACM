@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <cstring>
 #include <cstdio>
+#include <climits>
 using namespace std;
 const int MAX = 5e5 + 10;
 const int OK = 0;
@@ -55,11 +56,12 @@ int main()
     for (int i = 2; i <= cnt; i ++) {
         long long l = getid(nd[i].b);
         long long r = getid(nd[i].e);
-        if (r < l) {
-            flag = IM;
-            break;
-        }
+
         if (in(b, e, l)) {
+            if (r < l) {
+                flag = IM;
+                break;
+            }
             if (in(b, e, r)) {
                 continue;
             } else {
@@ -69,13 +71,12 @@ int main()
             flag = UN;
             break;
         }
+
     }
     if (e - b + 1 < m) {
         flag = UN;
     }
 
-    bool zerostart = (b == 0);
-    long long maxnum = zerostart ? (n * m) : ((n - 1) * m + b - 1);
     long long ans = 0;
     //printf("b, e: %lld %lld\n", b, e);
     //printf("max:%lld\n", maxnum);
@@ -86,22 +87,25 @@ int main()
             continue;
         }
         -- x;
-        if (maxnum < 0 || x <= maxnum) {
-            long long i = (x / m);
-            long long j = (x % m);
-            //printf("%lld %lld\n", i, j);
-            j = j + ((b == 0) ? (0) : (m - b));
-            //printf("%lld %lld\n", i, j);
-            if (j >= m) {
-                j -= m;
-                i += 1;
-            }
-            ++ i;
-            ++ j;
-            //printf("%lld %lld\n", i, j);
-            ans ^= i;
-            ans ^= j;
+
+        long long i = (x / m);
+        long long j = (x % m);
+        //printf("%lld %lld\n", i, j);
+        j = j + ((b == 0) ? (0) : (m - b));
+        //printf("%lld %lld\n", i, j);
+        if (j >= m) {
+            j -= m;
+            i += 1;
         }
+        ++ i;
+        ++ j;
+        if (i < 1 || i > n || j < 1 || j > m) {
+            i = j = 0;
+        }
+        //printf("%lld %lld\n", i, j);
+        ans ^= i;
+        ans ^= j;
+
     }
     if (flag == IM) {
         puts("Impossible!");
