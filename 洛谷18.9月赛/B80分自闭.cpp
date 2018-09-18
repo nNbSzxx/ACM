@@ -12,6 +12,7 @@ const int UN = 2;
 long long n, m;
 int s, q;
 int cnt;
+long long base;
 struct node {
     long long b, e;
 } nd[MAX];
@@ -28,7 +29,7 @@ bool in(long long l, long long r, long long x)
 
 long long getid(long long x)
 {
-    return x < nd[1].b ? x + m : x;
+    return x < base ? x + m : x;
 }
 
 int main()
@@ -47,6 +48,7 @@ int main()
         nd[cnt].e = b % m;
     }
     sort(nd + 1, nd + 1 + cnt, cmp);
+    base = nd[1].b;
     long long b = nd[1].b;
     long long e = getid(nd[1].e);
     int flag = OK;
@@ -68,12 +70,14 @@ int main()
                 e = r;
             }
         } else {
-            flag = UN;
+            base = nd[i].b;
+            b = getid(nd[i].b);
+            e = getid(nd[i].e);
             break;
         }
 
     }
-    if (e - b + 1 < m) {
+    if (flag == OK && e - b + 1 < m) {
         flag = UN;
     }
 
