@@ -83,20 +83,30 @@ int getLessK(int u, int initDis)
     dis[u] = initDis;
     getdis(u, -1);
     sort(disvec.begin(), disvec.end());
+    /*
+    for (auto a : disvec) {
+        printf("%d ", a);
+    }
+    puts("");
+    printf("k: %d\n", k);
+    */
     int ret = 0;
     for (int i = 0, j = disvec.size() - 1; i < j;) {
-        if (dis[i] + dis[j] <= k) {
+        if (disvec[i] + disvec[j] <= k) {
             ret += j - i;
+            //printf("%d %d\n", i, j);
             ++ i;
         } else {
             -- j;
         }
     }
+    //printf("getLessK, u, initDis, ret: %d %d %d\n", u, initDis, ret);
     return ret;
 }
 
 void solve(int cen)
 {
+    //printf("cen: %d\n", cen);
     vis[cen] = 1;
     ans += getLessK(cen, 0);
     for (int i = head[cen]; i; i = e[i].nt) {
