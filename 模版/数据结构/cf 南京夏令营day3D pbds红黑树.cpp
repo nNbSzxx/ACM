@@ -44,6 +44,7 @@ int main()
 		if (!flag) {
 			continue;
 		}
+		// 找第v大
 		auto it = rbt.find_by_order(v - 1);
 		if (vis[it -> value] && ans[it -> value] != u) {
 			flag = false;
@@ -53,11 +54,12 @@ int main()
 			flag = false;
 			continue;
 		}
-		//printf("%d %d\n", it -> value, it -> curid);
 		vis[it -> value] = 1;
 		occ[u] = 1;
 		ans[it -> value] = u;
+		// 插入
 		rbt.insert(node(it -> value, minn --));
+		// 删除
 		rbt.erase(it);
 	}
 	if (!flag) {
@@ -70,7 +72,6 @@ int main()
 			while (occ[id]) {
 				++ id;
 			}
-			//printf("id i: %d %d\n", id, i);
 			ans[i] = id;
 			occ[id] = 1;
 		}
