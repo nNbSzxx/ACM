@@ -176,6 +176,7 @@ int lca(int x, int y)
 
 int getdis(int u, int v)
 {
+    //printf("lca: %d %d %d\n", u, v, lca(u, v));
     return dep[u] - dep[lca(u, v)] * 2 + dep[v];
 }
 
@@ -212,6 +213,7 @@ int main()
             add(u, v);
             add(v, u);
         }
+        bfs(1);
         censz = MAX;
         getCentriod(1, -1, n);
         //puts("!!!!!!!!");
