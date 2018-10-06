@@ -2,13 +2,14 @@
 #include <cstdio>
 #include <cstring>
 using namespace std;
-const int MAX = 10005;
+const int MAX = 1000005;
+int nt[MAX];
+char s[MAX];
 
 int main()
 {
 	int n;
-	int nt[MAX];
-	char s[MAX];
+
 	int tc = 1;
 	while (scanf("%d",&n), n) {
 		scanf("%s",s);
