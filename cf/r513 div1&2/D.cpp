@@ -19,6 +19,6 @@ int main()
     for (int i = 1; i <= n; i ++) {
         ans += max(l[i], r[i]) + 1;
     }
-    printf("%d\n", ans);
+    printf("%lld\n", ans);
     return 0;
 }
